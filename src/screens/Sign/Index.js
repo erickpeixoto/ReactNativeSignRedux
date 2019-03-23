@@ -9,13 +9,10 @@ import {
 
 import styles from './Styles'
 import assets from './Assets'
+import Form from './Form'
 
 export default class SignScreen extends Component {
-    state = {
-        email: '',
-        password: ''
-    }
-
+   
     render() {
         return (
             <ImageBackground
@@ -38,23 +35,8 @@ export default class SignScreen extends Component {
                     </Text>
                 </View>
                 <View style={styles.container}>
-                    <TextInput
-                        placeholder={'Email'}
-                        style={styles.input}
-                        placeholderTextColor={'#000000'}
-                        autoFocus={true}
-                        value={this.state.email}
-                        onChangeText={email => this.setState({ email })}
-                    />
-                    <TextInput
-                        placeholder={'Password'}
-                        style={styles.input}
-                        placeholderTextColor={'#000000'}
-                        autoFocus={true}
-                        value={this.state.password}
-                        onChangeText={password => this.setState({ password })}
-                    />
-                    <TouchableOpacity
+                <Form/>
+                <TouchableOpacity
                         onPress={() => alert('heeyy')}
                     >
                         <Text style={{ textAlign: "right", color: 'white', }} >
@@ -65,7 +47,7 @@ export default class SignScreen extends Component {
                 <View>
                   <TouchableOpacity
                         style={styles.button}
-                        onPress={() => this.login()}
+                        onPress={() => this.props.navigation.navigate('Home')}
                     >
                         <Text style={styles.button}>
                             Log In
