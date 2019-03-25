@@ -1,10 +1,14 @@
 import { USER_LOGGED_IN, USER_LOGGED_OUT } from './actionTypes'
 
-export const login = user => {
-        return {
-            type: USER_LOGGED_IN,
-            payload: user 
-        }
+
+export const signIn = (values) => {
+   
+    return (dispatch, getState) => {
+        console.warn('asdasdas', getState())
+        const { app: { navigation } } = getState()
+        navigation.navigate('Home')
+    }
+        
 }   
 
 export const logout = () => {

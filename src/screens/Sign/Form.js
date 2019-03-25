@@ -1,73 +1,67 @@
-import React , { Component } from 'react';
-import { View } from 'react-native';
-import { Container, Item, Input, Header, Body, Content, Title, Button, Text } from 'native-base';
-import { Field,reduxForm } from 'redux-form';
+import React , { Component } from 'react'
+import { View } from 'react-native'
+import { Container, Item, Input, Header, Body, Content, Title, Button, Text } from 'native-base'
+import { Field,reduxForm } from 'redux-form'
+import styles from './Styles'
+
 const validate = values => {
-  const error= {};
-  error.email= '';
-  error.name= '';
-  var ema = values.email;
-  var nm = values.name;
+  const error= {}
+  error.email= ''
+  error.name= ''
+  var ema = values.email
+  var nm = values.name
   if(values.email === undefined){
-    ema = '';
+    ema = ''
   }
   if(values.name === undefined){
-    nm = '';
+    nm = ''
   }
   if(ema.length < 8 && ema !== ''){
-    error.email= 'too short';
+    error.email= 'too short'
   }
   if(!ema.includes('@') && ema !== ''){
-    error.email= '@ not included';
+    error.email= '@ not included'
   }
   if(nm.length > 8){
-    error.name= 'max 8 characters';
+    error.name= 'max 8 characters'
   }
-  return error;
-};
+  return error
+}
 class SimpleForm extends Component {
   constructor(props){
-    super(props);
+    super(props)
     this.state={
       isReady: false
-    };
-    this.renderInput = this.renderInput.bind(this);
+    }
+    this.renderInput = this.renderInput.bind(this)
   }
 
   renderInput({ input, label, type, meta: { touched, error, warning } }){
-    var hasError= false;
+    var hasError= false
     if(error !== undefined){
-      hasError= true;
+      hasError= true
     }
     return( 
       <Item error= {hasError}>
-        <Input {...input}/>
+        <Input {...input} style={styles.input} />
         {hasError ? <Text>{error}</Text> : <Text />}
       </Item>
     )
   }
   render(){
-     const { handleSubmit, reset } = this.props;
+     const { handleSubmit, reset } = this.props
    
     return (
-      <Container style={{width: 400}}>
-        <Header>
-          <Body>
-            <Title>Redux Form</Title>
-          </Body>
-        </Header>
-        <Content padder>
+      <View>
           <Field name="email" component={this.renderInput} />
           <Field name="name" component={this.renderInput} />
-          <Button block primary onPress= {reset}>
-            <Text>Submit</Text>
+          <Button block primary onPress= {handleSubmit}>
+            <Text>Acessar</Text>
           </Button>
-        </Content>
-      </Container>
+      </View>
     )
   }
 }
 export default reduxForm({
-  form: 'test',
-  validate
+  form: 'signin'
 })(SimpleForm)

@@ -1,4 +1,10 @@
 import React, { Component } from 'react'
+
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { signIn } from '../../store/Sign/actions'
+import { handleNavigation } from '../../store/App/actions'
+
 import {
     Text,
     View,
@@ -11,8 +17,14 @@ import styles from './Styles'
 import assets from './Assets'
 import Form from './Form'
 
-export default class SignScreen extends Component {
-   
+ class SignScreen extends Component {
+
+    componentDidMount(){
+        const { handleNavigation, navigation } = this.props
+        handleNavigation(navigation)
+    }
+
+
     render() {
         return (
             <ImageBackground
@@ -35,7 +47,7 @@ export default class SignScreen extends Component {
                     </Text>
                 </View>
                 <View style={styles.container}>
-                <Form/>
+                <Form onSubmit={(values) => this.props.signIn(values) } />
                 <TouchableOpacity
                         onPress={() => alert('heeyy')}
                     >
@@ -44,23 +56,12 @@ export default class SignScreen extends Component {
                     </Text>
                     </TouchableOpacity>
                 </View>
-                <View>
-                  <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => this.props.navigation.navigate('Home')}
-                    >
-                        <Text style={styles.button}>
-                            Log In
-                       </Text>
-                    </TouchableOpacity>
-                </View>
             </ImageBackground>
         )
     }
-
-    login = () => {
-        this.props.navigation.navigate('Products')
-    }
-
 }
+
+const mapStateToProps = state => ({ })  
+const mapDispatchToProps = dispatch => bindActionCreators({ signIn, handleNavigation }, dispatch)
+export default connect(mapStateToProps, mapDispatchToProps)(SignScreen)
 

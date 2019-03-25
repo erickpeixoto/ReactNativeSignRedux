@@ -1,0 +1,1 @@
+export const HANDLE_NAVIGATION = 'USER_LOGGED_IN'

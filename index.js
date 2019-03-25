@@ -6,12 +6,13 @@ import {name as appName} from './app.json'
 
 import storeConfig from './src/store/storeConfig'
 
+if (__DEV__) {
+    require('react-devtools')
+}
 const store = storeConfig()
 const Redux = () => (
     <Provider store={store}>
         <Navigator/>
     </Provider>
 )
-
-
 AppRegistry.registerComponent(appName, () => Redux)
